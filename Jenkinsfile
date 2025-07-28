@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from your repository
-                git 'https://github.com/your-repo/your-terraform-repo.git' // Change to your repository URL
+                git 'https://github.com/HariDEV-GIT/aws-jenkins-project.git'
             }
         }
 
