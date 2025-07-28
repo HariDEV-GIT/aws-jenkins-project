@@ -1,6 +1,7 @@
-dev_account_id = "123456789012"  # Change to your development AWS account number
-prod_account_id = "987654321098"  # Change to your production AWS account number
+dev_account_id = "420602990842"
+
 common_tags = {
-  Environment = "Dev"
-  Project     = "YourProjectName"  # Change as needed
+  Environment = "Develop"
+  Project     = "DevOps demo" 
+  Email       = "hari@gmail.com"
 }
