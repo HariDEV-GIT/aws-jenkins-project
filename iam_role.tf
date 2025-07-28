@@ -1,12 +1,12 @@
-resource "aws_iam_role" "example_role" {
-  name               = "example_role"
+resource "aws_iam_role" "s3_role" {
+  name               = "s3"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
         Action    = "sts:AssumeRole"
         Principal = {
-          Service = "ec2.amazonaws.com"  # Change as needed
+          Service = "ec2.amazonaws.com" 
         }
         Effect    = "Allow"
         Sid       = ""
@@ -14,5 +14,5 @@ resource "aws_iam_role" "example_role" {
     ]
   })
 
-  tags = var.common_tags  # Use the centralized tags
+  tags = var.common_tags
 }
