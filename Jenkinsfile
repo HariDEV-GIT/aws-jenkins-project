@@ -1,14 +1,13 @@
 pipeline {
     agent any
-    options {
-        disableConcurrentBuilds()
-    }
+
     environment {
-        // Define environment variables for sensitive data
-        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id') // Jenkins credential ID for AWS Access Key
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key') // Jenkins credential ID for AWS Secret Key
+        // Define environment variables for AWS credentials
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
     }
-    stages
+
+    stages {
         stage('Terraform Init') {
             steps {
                 script {
@@ -27,21 +26,21 @@ pipeline {
             }
         }
 
-        stage('Terraform Plan - Prod') {
-            steps {
-                script {
-                    // Plan the deployment for the production environment
-                    sh 'terraform plan -var-file="prod.tfvars"'
-                }
-            }
-        }
-
         stage('Terraform Apply - Dev') {
             when {branch 'main'}
             steps {
                 script {
                     // Apply the configuration for the development environment
                     sh 'terraform apply -var-file="dev.tfvars" -auto-approve'
+                }
+            }
+        }
+
+        stage('Terraform Plan - Prod') {
+            steps {
+                script {
+                    // Plan the deployment for the production environment
+                    sh 'terraform plan -var-file="prod.tfvars"'
                 }
             }
         }
@@ -71,3 +70,4 @@ pipeline {
             echo 'Deployment failed!'
         }
     }
+}
