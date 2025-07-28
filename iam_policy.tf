@@ -1,6 +1,6 @@
-resource "aws_iam_policy" "example_policy" {
-  name        = "example_policy"
-  description = "Example policy for accessing resources"
+resource "aws_iam_policy" "s3_policy" {
+  name        = "s3_policy"
+  description = "S3 policy for accessing resources"
   
   policy = jsonencode({
     Version = "2012-10-17"
@@ -13,5 +13,5 @@ resource "aws_iam_policy" "example_policy" {
     ]
   })
 
-  tags = var.common_tags  # Use the centralized tags
+  tags = var.common_tags
 }
