@@ -1,19 +1,13 @@
 pipeline {
     agent any
-
+    options {
+        disableConcurrentBuilds()
+    }
     environment {
         // Define environment variables for sensitive data
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id') // Jenkins credential ID for AWS Access Key
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key') // Jenkins credential ID for AWS Secret Key
     }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from your repository
-                git 'https://github.com/HariDEV-GIT/aws-jenkins-project.git'
-            }
-        }
 
         stage('Terraform Init') {
             steps {
