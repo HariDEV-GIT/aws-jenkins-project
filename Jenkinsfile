@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Plan the deployment for the development environment
-                    sh 'terraform plan -var-file="dev.tfvars"'
+                    sh 'terraform plan -var-file="tfvars/dev.tfvars"'
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Apply the configuration for the development environment
-                    sh 'terraform apply -var-file="dev.tfvars" -auto-approve'
+                    sh 'terraform apply -var-file="tfvars/dev.tfvars" -auto-approve'
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     // Plan the deployment for the production environment
-                    sh 'terraform plan -var-file="prod.tfvars"'
+                    sh 'terraform plan -var-file="tfvars/prod.tfvars"'
                 }
             }
         }
@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                     // Apply the configuration for the production environment
-                    sh 'terraform apply -var-file="prod.tfvars" -auto-approve'
+                    sh 'terraform apply -var-file="tfvars/prod.tfvars" -auto-approve'
                 }
             }
         }
