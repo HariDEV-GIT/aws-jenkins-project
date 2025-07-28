@@ -1,6 +1,6 @@
-resource "aws_secretsmanager_secret" "example_secret" {
-  name        = "example_secret"
-  description = "Example secret for storing sensitive information"
+resource "aws_secretsmanager_secret" "s3_details_secret" {
+  name        = "aws-jenkins-demo-bucket"
+  description = "Example secret for storing aws-jenkins information"
 
-  tags = var.common_tags  # Use the centralized tags
+  tags = var.common_tags 
 }
