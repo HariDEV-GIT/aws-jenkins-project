@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         // Define environment variables for sensitive data
-        TF_VAR_db_password = credentials('db-password-secret') // Use Jenkins credentials for sensitive data
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id') // Jenkins credential ID for AWS Access Key
         AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key') // Jenkins credential ID for AWS Secret Key
     }
@@ -34,15 +33,6 @@ pipeline {
             }
         }
 
-        stage('Terraform Apply - Dev') {
-            steps {
-                script {
-                    // Apply the configuration for the development environment
-                    sh 'terraform apply -var-file="dev.tfvars" -auto-approve'
-                }
-            }
-        }
-
         stage('Terraform Plan - Prod') {
             steps {
                 script {
@@ -52,7 +42,18 @@ pipeline {
             }
         }
 
+        stage('Terraform Apply - Dev') {
+            when {branch 'main'}
+            steps {
+                script {
+                    // Apply the configuration for the development environment
+                    sh 'terraform apply -var-file="dev.tfvars" -auto-approve'
+                }
+            }
+        }
+
         stage('Terraform Apply - Prod') {
+            when {branch 'prod'}
             steps {
                 script {
                     // Apply the configuration for the production environment
