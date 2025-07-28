@@ -1,6 +1,6 @@
-resource "aws_s3_bucket" "example_bucket" {
-  bucket = "dev-example-bucket"  # Change to a unique bucket name
+resource "aws_s3_bucket" "aws-jenkins-demo-bucket" {
+  bucket = "aws-jenkins-demo-bucket" 
   acl    = "private"
 
-  tags = var.common_tags  # Use the centralized tags
+  tags = var.common_tags 
 }
