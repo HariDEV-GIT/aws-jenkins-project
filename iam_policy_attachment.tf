@@ -3,7 +3,7 @@ resource "aws_iam_role_policy_attachment" "s3_policy_role" {
   role       = aws_iam_role.s3_role.name
 }
 
-// resource "aws_iam_role_policy_attachment" "role1_policy2" {
+/* resource "aws_iam_role_policy_attachment" "role1_policy2" {
   policy_arn = aws_iam_policy.example_policy_2.arn
   role       = aws_iam_role.example_role_1.name
 }
@@ -37,7 +37,7 @@ resource "aws_iam_role_policy_attachment" "role3_policy2" {
   policy_arn = aws_iam_policy.example_policy_2.arn
   role       = aws_iam_role.example_role_3.name
 }
-//
+*/
 resource "aws_iam_role_policy_attachment" "role3_policy3" {
   policy_arn = aws_iam_policy.example_policy_3.arn
   role       = aws_iam_role.example_role_3.name
