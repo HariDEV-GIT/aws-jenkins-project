@@ -25,13 +25,13 @@ variable "db_name" {
 } */
 
 variable "dev_account_id" {
-  description = "The AWS account ID for the development environment"
-  type        = 420602990842
+  description    = "The AWS account ID for the development environment"
+  default        = "420602990842"
 }
 
 variable "prod_account_id" {
-  description = "The AWS account ID for the production environment"
-  type        = 454673294031
+  description    = "The AWS account ID for the production environment"
+  default        = "454673294031"
 }
 
 variable "common_tags" {
