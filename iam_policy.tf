@@ -1,4 +1,4 @@
-resource "aws_iam_policy" "s3_policy" {
+resource "aws_iam_policy" "policy" {
   name        = "s3_policy"
   description = "S3 policy for accessing resources"
   
