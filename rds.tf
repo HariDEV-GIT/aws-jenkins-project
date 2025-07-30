@@ -29,7 +29,7 @@ resource "aws_db_subnet_group" "my_db_subnet_group" {
 
 // RDS instance
 resource "aws_db_instance" "my_db" {
-  identifier               = "aws-demo-db"
+  identifier               = "aws_demo_db"
   engine                   = "mysql"  
   engine_version           = "8.0"    
   instance_class           = "db.t3.micro"  
