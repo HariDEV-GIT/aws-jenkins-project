@@ -8,8 +8,10 @@ pipeline {
         stage('Terraform Init - develop') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh 'terraform init'
+                    dir('backend/dev') {
+                        withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            sh 'terraform init'
+                        }
                     }
                 }
             }
@@ -18,8 +20,10 @@ pipeline {
         stage('Terraform Init - prod') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'aws-access-key-id-prod', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key-prod', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh 'terraform init'
+                    dir('backend/prod') {
+                        withCredentials([string(credentialsId: 'aws-access-key-id-prod', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key-prod', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            sh 'terraform init'
+                        }
                     }
                 }
             }
@@ -28,10 +32,12 @@ pipeline {
         stage('Terraform Plan - develop') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh '''
-                        terraform plan -var-file="tfvars/dev.tfvars"
-                        '''
+                    dir('backend/dev') {
+                        withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            sh '''
+                            terraform plan -var-file="tfvars/dev.tfvars"
+                            '''
+                        }
                     }
                 }
             }
@@ -40,10 +46,12 @@ pipeline {
         stage('Terraform Plan - prod') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'aws-access-key-id-prod', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key-prod', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh '''
-                        terraform plan -var-file="tfvars/prod.tfvars"
-                        '''
+                    dir('backend/prod') {
+                        withCredentials([string(credentialsId: 'aws-access-key-id-prod', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key-prod', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            sh '''
+                            terraform plan -var-file="tfvars/prod.tfvars"
+                            '''
+                        }
                     }
                 }
             }
@@ -53,10 +61,12 @@ pipeline {
             when { branch 'main' }
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh '''
-                        terraform apply -var-file="tfvars/dev.tfvars" -auto-approve
-                        '''
+                    dir('backend/dev') {
+                        withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            sh '''
+                            terraform apply -var-file="tfvars/dev.tfvars" -auto-approve
+                            '''
+                        }
                     }
                 }
             }
@@ -66,15 +76,18 @@ pipeline {
             when { branch 'prod' }
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'aws-access-key-id-prod', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key-prod', variable: 'AWS_SECRET_ACCESS_KEY')]) {
-                        sh '''
-                        terraform apply -var-file="tfvars/prod.tfvars" -auto-approve
-                        '''
+                    dir('backend/prod') {
+                        withCredentials([string(credentialsId: 'aws-access-key-id-prod', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key-prod', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                            sh '''
+                            terraform apply -var-file="tfvars/prod.tfvars" -auto-approve
+                            '''
+                        }
                     }
                 }
             }
         }
     }
+    
     post {
         always {
             cleanWs()
