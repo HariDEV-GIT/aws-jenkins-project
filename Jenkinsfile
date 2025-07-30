@@ -35,7 +35,7 @@ pipeline {
                     dir('backend/dev') {
                         withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                             sh '''
-                            terraform plan -var-file="tfvars/dev.tfvars"
+                            terraform plan -var-file="../../tfvars/dev.tfvars"
                             '''
                         }
                     }
@@ -49,7 +49,7 @@ pipeline {
                     dir('backend/prod') {
                         withCredentials([string(credentialsId: 'aws-access-key-id-prod', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key-prod', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                             sh '''
-                            terraform plan -var-file="tfvars/prod.tfvars"
+                            terraform plan -var-file="../../tfvars/prod.tfvars"
                             '''
                         }
                     }
@@ -64,7 +64,7 @@ pipeline {
                     dir('backend/dev') {
                         withCredentials([string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                             sh '''
-                            terraform apply -var-file="tfvars/dev.tfvars" -auto-approve
+                            terraform apply -var-file="../../tfvars/dev.tfvars" -auto-approve
                             '''
                         }
                     }
@@ -79,7 +79,7 @@ pipeline {
                     dir('backend/prod') {
                         withCredentials([string(credentialsId: 'aws-access-key-id-prod', variable: 'AWS_ACCESS_KEY_ID'), string(credentialsId: 'aws-secret-access-key-prod', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                             sh '''
-                            terraform apply -var-file="tfvars/prod.tfvars" -auto-approve
+                            terraform apply -var-file="../../tfvars/prod.tfvars" -auto-approve
                             '''
                         }
                     }
