@@ -2,6 +2,6 @@ terraform {
   backend "s3" {
     bucket         = "terraform-statefile-bucket-demo-project-prod"
     key            = "terraform/state"
-    region         = "us-east-1"
+    region         = "ap-south-1"
   }
 }
