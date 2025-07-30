@@ -23,8 +23,8 @@ resource "aws_security_group" "my_db_sg" {
 // subnet group 
 resource "aws_db_subnet_group" "my_db_subnet_group" {
   name       = "rds_db_subnet_group"
-  subnet_ids = ["subnet-079540737949d4ae9"]
-  tags       = var.common_tags  # Apply common tags if you have them defined
+  subnet_ids = ["subnet-079540737949d4ae9", "subnet-0a4a9a353725e0d1d"]
+  tags       = var.common_tags 
 }
 
 // RDS instance
