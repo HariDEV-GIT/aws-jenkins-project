@@ -28,11 +28,9 @@ pipeline {
         stage('Terraform Plan - develop') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'db_username', variable: 'DB_USERNAME'), string(credentialsId: 'db_password', variable: 'DB_PASSWORD')]) {
-                        sh '''
-                        terraform plan -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/dev.tfvars"
-                        '''
-                    }
+                    sh '''
+                    terraform plan -var-file="tfvars/dev.tfvars"
+                    '''
                 }
             }
         }
@@ -40,11 +38,9 @@ pipeline {
         stage('Terraform Plan - prod') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'db_username', variable: 'DB_USERNAME'), string(credentialsId: 'db_password', variable: 'DB_PASSWORD')]) {
-                        sh '''
-                        terraform plan -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/prod.tfvars"
-                        '''
-                    }
+                    sh '''
+                    terraform plan -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/prod.tfvars"
+                    '''
                 }
             }
         }
@@ -53,11 +49,9 @@ pipeline {
             when {branch 'main'}
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'db_username', variable: 'DB_USERNAME'), string(credentialsId: 'db_password', variable: 'DB_PASSWORD')]) {
-                        sh '''
-                        terraform apply -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/dev.tfvars" -auto-approve
-                        '''
-                    }
+                    sh '''
+                    terraform apply -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/dev.tfvars" -auto-approve
+                    '''
                 }
             }
         }   
@@ -66,11 +60,9 @@ pipeline {
             when {branch 'prod'}
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'db_username', variable: 'DB_USERNAME'), string(credentialsId: 'db_password', variable: 'DB_PASSWORD')]) {
-                        sh '''
-                        terraform apply -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/prod.tfvars" -auto-approve
-                        '''
-                    }
+                    sh '''
+                    terraform apply -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/prod.tfvars" -auto-approve
+                    '''
                 }
             }
         }
