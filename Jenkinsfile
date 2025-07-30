@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    terraform plan -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/prod.tfvars"
+                    terraform plan -var-file="tfvars/prod.tfvars"
                     '''
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    terraform apply -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/dev.tfvars" -auto-approve
+                    terraform apply -var-file="tfvars/dev.tfvars" -auto-approve
                     '''
                 }
             }
@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    terraform apply -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/prod.tfvars" -auto-approve
+                    terraform apply -var-file="tfvars/prod.tfvars" -auto-approve
                     '''
                 }
             }
