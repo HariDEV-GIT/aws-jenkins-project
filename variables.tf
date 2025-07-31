@@ -15,14 +15,9 @@ variable "db_password" {
   sensitive     = true
 }
 
-variable "dev_account_id" {
+variable "aws_account_id" {
   description   = "The AWS account ID for the development environment"
   default       = "420602990842"
-}
-
-variable "prod_account_id" {
-  description   = "The AWS account ID for the production environment"
-  default       = "454673294031"
 }
 
 variable "common_tags" {
@@ -30,6 +25,6 @@ variable "common_tags" {
   type          = map(string)
   default       = {
     Environment = "Dev" 
-    Project     = "YourProjectName" 
+    Project     = "aws-demo-project" 
   }
 }
