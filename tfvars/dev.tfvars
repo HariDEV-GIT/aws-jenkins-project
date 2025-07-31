@@ -1,4 +1,4 @@
-dev_account_id = "420602990842"
+awsv_account_id = "420602990842"
 
 common_tags = {
   Environment = "Develop"
