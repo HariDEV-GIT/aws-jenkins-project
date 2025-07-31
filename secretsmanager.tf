@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "sm" {
-  name         = "demo_secret_ops"
+  name         = "demo_secret_tech"
   description  = "Secret for storing aws-jenkins information"
   tags         = var.common_tags 
 }
