@@ -38,6 +38,6 @@ resource "aws_db_instance" "my_db" {
   vpc_security_group_ids   = [aws_security_group.my_db_sg.id]
   username                 = var.db_username  
   password                 = var.db_password  
-  skip_final_snapshot      = false 
+  skip_final_snapshot      = true 
   tags                     = var.common_tags  
 }
