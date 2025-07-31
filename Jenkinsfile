@@ -5,11 +5,11 @@ pipeline {
     }
     environment {
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-key-id')
     }              
 
     stages {
-      /*  stage('Terraform Init') {
+        stage('Terraform Init') {
             steps {
                 script {
                     sh 'terraform init'
@@ -40,9 +40,9 @@ pipeline {
                     }
                 }
             }
-        } */
+        }
 
-        stage('Terraform Destroy') {
+       /* stage('Terraform Destroy') {
             when { branch 'main' }
             steps {
                 script {
@@ -55,7 +55,7 @@ pipeline {
                     }
                 }
             }
-        }
+        } */
     }
     
     post {
