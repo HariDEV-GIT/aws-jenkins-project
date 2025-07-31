@@ -9,7 +9,7 @@ pipeline {
     }              
 
     stages {
-        stage('Terraform Init') {
+    /*    stage('Terraform Init') {
             steps {
                 script {
                     sh 'terraform init'
@@ -40,7 +40,23 @@ pipeline {
                     }
                 }
             }
+        }*/
+
+        stage('Terraform Destroy') {
+            when { branch 'main' }
+            steps {
+                script {
+                    input message: 'Are you sure you want to destroy the resources?', ok: 'Yes'
+                    withCredentials([string(credentialsId: 'db_username', variable: 'DB_USERNAME'), string(credentialsId: 'db_password', variable: 'DB_PASSWORD')]) {
+                        sh '''
+                        terraform destroy -var="db_username=${DB_USERNAME}" -var="db_password=${DB_PASSWORD}" -var-file="tfvars/dev.tfvars" -auto-approve
+                        '''
+                    }
+                }
+            }
         }
+    }
+        
     }
     
     post {
