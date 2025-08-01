@@ -6,10 +6,10 @@ resource "aws_security_group" "my_db_sg" {
   tags        = var.common_tags  
 
   ingress {
-    from_port   = 3306  # Change to your database port
-    to_port     = 3306  # Change to your database port
+    from_port   = 3306  
+    to_port     = 3306  
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Change to your desired CIDR block for security
+    cidr_blocks = ["0.0.0.0/0"]  
   }
 
   egress {
