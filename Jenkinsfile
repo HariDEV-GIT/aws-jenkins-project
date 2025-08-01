@@ -9,7 +9,7 @@ pipeline {
     }              
 
     stages {
-        stage('Terraform Init') {
+      /*  stage('Terraform Init') {
             steps {
                 script {
                     sh 'terraform init'
@@ -40,9 +40,9 @@ pipeline {
                     }
                 }
             }
-        }
+        } */
 
-        /* stage('Terraform Destroy') {
+        stage('Terraform Destroy') {
             when { branch 'main' }
             steps {
                 script {
@@ -55,7 +55,7 @@ pipeline {
                     }
                 }
             }
-        } */
+        } 
     }
     
     post {
