@@ -4,6 +4,5 @@ resource "aws_instance" "ec2_instance" {
   key_name      = "jenkins_key"
   tags = {
   Name = "aws-demo"
-  }
-  tags         = var.common_tags  
+  } 
 }
